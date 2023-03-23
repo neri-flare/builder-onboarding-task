@@ -1,38 +1,35 @@
 import { Builder } from "@builder.io/react";
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 type Props = {
   text: string;
   bgColor?: string;
   textColor?: string;
   fontStyle?: string;
-  size?: "sm" | "lg";
+  size: "sm" | "lg";
 };
 
-const sizeMap = {
-  sm: {
-    height: "40px",
-    fontSize: "16px",
-    paddingInline: "34px",
-  },
-  lg: {
-    height: "64px",
-    fontSize: "18px",
-    paddingInline: "48px",
-  },
+const sizeVariant = {
+  sm: css`
+    height: 40px;
+    font-size: 16px;
+    padding-inline: 34px;
+  `,
+  lg: css`
+    height: 64px;
+    font-size: 18px;
+    padding-inline: 48px;
+  `,
 };
 
 const StyledButton = styled("button")<Omit<Props, "text">>`
   font-family: "Arial";
   font-weight: 700;
-  font-size: ${({ size }) => (size ? sizeMap[size]?.fontSize : "18px")};
+  ${({ size }) => sizeVariant[size]}
   font-style: ${({ fontStyle }) => fontStyle || "normal"};
   background-color: ${({ bgColor }) => bgColor || "#2C816E"};
   color: ${({ textColor }) => textColor || "#fff"};
-  height: ${({ size }) => (size ? sizeMap[size]?.height : "64px")};
-  padding-inline: ${({ size }) =>
-    size ? sizeMap[size]?.paddingInline : "47px"};
   border: none;
   border-radius: 8px;
 `;
@@ -42,7 +39,7 @@ const Button: React.FC<Props> = ({
   textColor,
   text,
   fontStyle,
-  size,
+  size = "lg",
 }) => {
   return (
     <StyledButton
@@ -69,12 +66,24 @@ Builder.registerComponent(Button, {
     {
       name: "bgColor",
       type: "color",
-      defaultValue: "whtie",
+      defaultValue: "#2C816E",
     },
     {
       name: "textColor",
       type: "color",
-      defaultValue: "black",
+      defaultValue: "white",
+    },
+    {
+      name: "fontStyle",
+      type: "text",
+      defaultValue: "normal",
+      enum: ["normal", "italic", "bold"],
+    },
+    {
+      name: "size",
+      type: "text",
+      defaultValue: "lg",
+      enum: ["sm", "lg"],
     },
   ],
 });
