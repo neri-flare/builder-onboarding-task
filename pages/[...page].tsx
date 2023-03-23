@@ -7,6 +7,8 @@ import { GetStaticProps, GetStaticPropsContext } from "next";
 import { ParsedUrlQuery } from "querystring";
 import MarbleHeader from "@/components/MarbleHeader";
 import "../components/Button";
+import "../components/Text";
+import "../components/Title";
 
 interface Params extends ParsedUrlQuery {
   page?: string[];
@@ -14,10 +16,6 @@ interface Params extends ParsedUrlQuery {
 
 interface Context extends GetStaticPropsContext {
   params?: Params;
-}
-
-interface Props {
-  page?: { [key: string]: any };
 }
 
 // Replace with your Public API Key
@@ -38,7 +36,7 @@ export const getStaticProps: GetStaticProps = async ({ params }: Context) => {
     props: {
       page: page || null,
     },
-    revalidate: 2,
+    revalidate: 1,
   };
 };
 
@@ -49,12 +47,15 @@ export async function getStaticPaths() {
     fields: "data.url",
     options: { noTargeting: true },
   });
-  console.log("page", pages);
 
   return {
     paths: pages.map((page) => `${page.data?.url}`),
     fallback: true,
   };
+}
+
+interface Props {
+  page?: { [key: string]: any };
 }
 
 const Page: React.FC<Props> = ({ page }) => {
