@@ -7,7 +7,6 @@ const StyledParagraph = styled.p`
   font-style: italic;
   font-family: "Arial";
   font-weight: 700;
-  font-size: 18px;
   line-height: 26px;
 `;
 

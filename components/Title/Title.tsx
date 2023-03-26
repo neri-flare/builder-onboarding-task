@@ -4,7 +4,6 @@ import styled from "styled-components";
 
 const StyledTitle = styled.h1`
   font-family: "Arial";
-  color: #192348;
   font-style: normal;
   font-weight: 400;
   font-size: 48px;
