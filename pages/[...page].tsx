@@ -9,6 +9,7 @@ import MarbleHeader from "@/components/MarbleHeader";
 import "../components/Button";
 import "../components/Text";
 import "../components/Title";
+import "../components/Ruler";
 
 interface Params extends ParsedUrlQuery {
   page?: string[];
